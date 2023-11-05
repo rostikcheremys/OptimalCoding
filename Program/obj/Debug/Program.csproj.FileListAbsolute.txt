@@ -1,0 +1,6 @@
+D:\Programming\C#\Оптимальне кодування\Program\Program\bin\Debug\Program.exe
+D:\Programming\C#\Оптимальне кодування\Program\Program\bin\Debug\Program.pdb
+D:\Programming\C#\Оптимальне кодування\Program\Program\obj\Debug\Program.csproj.AssemblyReference.cache
+D:\Programming\C#\Оптимальне кодування\Program\Program\obj\Debug\Program.csproj.CoreCompileInputs.cache
+D:\Programming\C#\Оптимальне кодування\Program\Program\obj\Debug\Program.exe
+D:\Programming\C#\Оптимальне кодування\Program\Program\obj\Debug\Program.pdb
