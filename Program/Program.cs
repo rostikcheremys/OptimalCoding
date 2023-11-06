@@ -1,125 +1,43 @@
 ﻿using System;
 using System.Linq;
+using System.Globalization;
 using System.Collections.Generic;
 
 namespace Program
 {
-    internal class Program
+    internal abstract class Program
     {
         static void Main()
         {
-            Console.WriteLine("Для кодування джерел введіть через пропуск ймовірності виникнення символів:");
+            Console.WriteLine("Введіть 1 для метода кодування методикою Хаффмена:");
+            Console.WriteLine("Введіть 2 для метода кодування методикою Шеннона-Фано:");
             
-            Dictionary<string, string> dict = new Dictionary<string, string>();
-            List<double> list = Console.ReadLine()!.Trim().Split().Select(double.Parse).ToList();
-           
-            Task1(dict, list);
-            Task2(dict, list);
-        }
-        
-        static void Task1(Dictionary<string, string> dict, List<double> list)
-        {
-            var nodes = list.Select(n => new HuffmanСoding { Probability = n }).ToList();
-            while (nodes.Count > 1)
-            {
-                nodes.Sort((x, y) => x.Probability.CompareTo(y.Probability));
-                var newNode = new HuffmanСoding
-                {
-                    Probability = nodes[0].Probability + nodes[1].Probability,
-                    Left = nodes[0],
-                    Right = nodes[1]
-                };
-                nodes.RemoveRange(0, 2);
-                nodes.Add(newNode);
-            }
-            int index = 1;
-
-            GetCodes(nodes[0], "");
-
-            var probabilities = dict.Select(kv => new ShannonFanoCoding { Name = kv.Key, Probability = list[int.Parse(kv.Key.Substring(1)) - 1], Code = kv.Value }).ToList();
-            probabilities.Sort((x, y) => x.Name.CompareTo(y.Name));
-
-            Console.WriteLine("Кодування методикою Хаффмена:");
-
-            Console.WriteLine("Symbol\tProbability\tCode");
-            foreach (var symbolProbability in probabilities)
-            {
-                Console.WriteLine($"{symbolProbability.Name}\t{symbolProbability.Probability}\t\t{symbolProbability.Code}");
-            }
-
-            Console.WriteLine("\n********************************************************************\n");
-
-            void GetCodes(HuffmanСoding node, string code)
-            {
-                if (node.Left == null && node.Right == null) dict["x" + index++] = code;
-                else
-                {
-                    if (node.Left != null) GetCodes(node.Left, code + "0");
-                    if (node.Right != null) GetCodes(node.Right, code + "1");
-                }
-            }
-        }
-
-        static void Task2(Dictionary<string, string> dict, List<double> list)
-        {
-            var probabilities = new List<ShannonFanoCoding>();
-            int index = 1;
+            uint choice = Convert.ToUInt32(Console.ReadLine());
             
-            foreach (var prob in list)
+            switch (choice)
             {
-                probabilities.Add(new ShannonFanoCoding { Name = "x" + index++, Probability = prob });
-            }
+                case 1:
+                    Console.WriteLine("Введіть через пробіл ймовірності виникнення символів:");
+                    
+                    List<double> listOfFirst = Console.ReadLine()!.Trim().Split().Select(s => double.Parse(s, CultureInfo.InvariantCulture)).ToList();
+                    Dictionary<string, string> dictOfFirst = new Dictionary<string, string>();
+                    
+                    Huffman taskOfFirst = new Huffman();
 
-            probabilities.Sort((x, y) => y.Probability.CompareTo(x.Probability));
+                    taskOfFirst.TaskOfFirst(dictOfFirst, listOfFirst);
+                    break;
+                
+                case 2:
+                    Console.WriteLine("Введіть через пробіл ймовірності виникнення символів:");
+                    
+                    List<double> listOfSecond = Console.ReadLine()!.Trim().Split().Select(s => double.Parse(s, CultureInfo.InvariantCulture)).ToList();
+                    Dictionary<string, string> dictOfSecond = new Dictionary<string, string>();
 
-            Divide(probabilities, 0, probabilities.Count - 1);
+                    ShannonFano taskOfSecond = new ShannonFano();
             
-            Console.WriteLine("Кодування методикою Шеннона-Фано:");
-            
-            Console.WriteLine("Symbol\tProbability\tCode");
-            foreach (var symbolProbability in probabilities.OrderBy(e => e.Name))
-            {
-                Console.WriteLine($"{symbolProbability.Name}\t{symbolProbability.Probability}\t\t{symbolProbability.Code}");
+                    taskOfSecond.TaskOfSecond(dictOfSecond, listOfSecond);
+                    break;
             }
-        }
-        static void Divide(List<ShannonFanoCoding> probabilities, int start, int end)
-        {
-            if (start >= end) return;
-
-            double totalProbability = 0;
-            for (int i = start; i <= end; i++)
-            {
-                totalProbability += probabilities[i].Probability;
-            }
-
-            double cumulativeProbability = 0;
-            int splitIndex = -1;
-            double minDifference = double.MaxValue;
-
-            for (int i = start; i <= end; i++)
-            {
-                cumulativeProbability += probabilities[i].Probability;
-                double difference = Math.Abs(cumulativeProbability - totalProbability / 2);
-                if (difference < minDifference)
-                {
-                    splitIndex = i;
-                    minDifference = difference;
-                }
-            }
-
-            for (int i = start; i <= splitIndex; i++)
-            {
-                probabilities[i].Code += "0";
-            }
-
-            for (int i = splitIndex + 1; i <= end; i++)
-            {
-                probabilities[i].Code += "1";
-            }
-
-
-            Divide(probabilities, start, splitIndex);
-            Divide(probabilities, splitIndex + 1, end);
         }
     }
 }

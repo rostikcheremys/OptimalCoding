@@ -1,6 +1,12 @@
-D:\Programming\C#\Оптимальне кодування\Program\Program\bin\Debug\Program.exe
-D:\Programming\C#\Оптимальне кодування\Program\Program\bin\Debug\Program.pdb
-D:\Programming\C#\Оптимальне кодування\Program\Program\obj\Debug\Program.csproj.AssemblyReference.cache
-D:\Programming\C#\Оптимальне кодування\Program\Program\obj\Debug\Program.csproj.CoreCompileInputs.cache
-D:\Programming\C#\Оптимальне кодування\Program\Program\obj\Debug\Program.exe
-D:\Programming\C#\Оптимальне кодування\Program\Program\obj\Debug\Program.pdb
+D:/Programming/C#/Оптимальне кодування/Program/Program/bin/Debug/Program.exe
+D:/Programming/C#/Оптимальне кодування/Program/Program/bin/Debug/Program.pdb
+D:/Programming/C#/Оптимальне кодування/Program/Program/obj/Debug/Program.csproj.AssemblyReference.cache
+D:/Programming/C#/Оптимальне кодування/Program/Program/obj/Debug/Program.csproj.CoreCompileInputs.cache
+D:/Programming/C#/Оптимальне кодування/Program/Program/obj/Debug/Program.exe
+D:/Programming/C#/Оптимальне кодування/Program/Program/obj/Debug/Program.pdb
+/Users/rostik/Documents/Programming/C#/OptimalCoding/Program/bin/Debug/Program.exe
+/Users/rostik/Documents/Programming/C#/OptimalCoding/Program/bin/Debug/Program.pdb
+/Users/rostik/Documents/Programming/C#/OptimalCoding/Program/obj/Debug/Program.csproj.AssemblyReference.cache
+/Users/rostik/Documents/Programming/C#/OptimalCoding/Program/obj/Debug/Program.csproj.CoreCompileInputs.cache
+/Users/rostik/Documents/Programming/C#/OptimalCoding/Program/obj/Debug/Program.exe
+/Users/rostik/Documents/Programming/C#/OptimalCoding/Program/obj/Debug/Program.pdb
