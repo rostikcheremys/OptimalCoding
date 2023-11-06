@@ -30,9 +30,11 @@ namespace Program
             }
 
             int index = 1;
+            
             GetCodes(nodes[0], "");
 
             var probabilities = dict.Select(kv => new { Name = kv.Key, Probability = list[int.Parse(kv.Key.Substring(1)) - 1], Code = kv.Value }).ToList();
+            
             probabilities.Sort((x, y) => x.Name.CompareTo(y.Name));
 
             Console.WriteLine("\nКодування методикою Хаффмена:");

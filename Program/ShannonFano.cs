@@ -44,8 +44,9 @@ namespace Program
                 totalProbability += probabilities[i].Probability;
             }
 
-            double probability = 0;
             int index = -1;
+            
+            double probability = 0;
             double minDifference = double.MaxValue;
 
             for (int i = start; i <= end; i++)
