@@ -10,38 +10,15 @@ namespace Program
         private double Probability { get; set; }
         private string Code { get; set; }
         
-        public void TaskOfSecond(Dictionary<string, string> dict, List<double> list)
-        {
-            var probabilities = new List<ShannonFano>();
-            int index = 1;
-            
-            foreach (double prob in list)
-            {
-                probabilities.Add(new ShannonFano { Name = "x" + index++, Probability = prob });
-            }
-
-            probabilities.Sort((x, y) => y.Probability.CompareTo(x.Probability));
-
-            Divide(probabilities, 0, probabilities.Count - 1);
-            
-            Console.WriteLine("\nКодування методикою Шеннона-Фано:");
-            
-            Console.WriteLine("Symbol\tProbability\tCode");
-            
-            foreach (var symbol in probabilities.OrderBy(e => e.Name))
-            {
-                Console.WriteLine($"{symbol.Name}\t{symbol.Probability}\t\t{symbol.Code}");
-            }
-        }
-        static void Divide(List<ShannonFano> probabilities, int start, int end)
+        private void SplitNodes(List<ShannonFano> probabilities, int start, int end)
         {
             if (start >= end) return;
 
-            double totalProbability = 0;
+            double sum = 0;
             
             for (int i = start; i <= end; i++)
             {
-                totalProbability += probabilities[i].Probability;
+                sum += probabilities[i].Probability;
             }
 
             int index = -1;
@@ -53,7 +30,7 @@ namespace Program
             {
                 probability += probabilities[i].Probability;
                 
-                double difference = Math.Abs(probability - totalProbability / 2);
+                double difference = Math.Abs(probability - sum / 2);
                 
                 if (difference < minDifference)
                 {
@@ -72,8 +49,32 @@ namespace Program
                 probabilities[i].Code += "1";
             }
             
-            Divide(probabilities, start, index);
-            Divide(probabilities, index + 1, end);
+            SplitNodes(probabilities, start, index);
+            SplitNodes(probabilities, index + 1, end);
+        }
+        
+        public void TaskOfSecond(List<double> list)
+        {
+            var probabilities = new List<ShannonFano>();
+            
+            int index = 1;
+            
+            foreach (double prob in list)
+            {
+                probabilities.Add(new ShannonFano { Name = "x" + index++, Probability = prob });
+            }
+
+            probabilities.Sort((x, y) => y.Probability.CompareTo(x.Probability));
+
+            SplitNodes(probabilities, 0, probabilities.Count - 1);
+            
+            Console.WriteLine("\nКодування методикою Шеннона-Фано:");
+            Console.WriteLine("Symbol\tProbability\tCode");
+            
+            foreach (var symbol in probabilities.OrderBy(e => e.Name))
+            {
+                Console.WriteLine($"{symbol.Name}\t{symbol.Probability}\t\t{symbol.Code}");
+            }
         }
     }
 }

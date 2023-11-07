@@ -31,7 +31,7 @@ namespace Program
 
             int index = 1;
             
-            GetCodes(nodes[0], "");
+            CalculateCodes(nodes[0], "");
 
             var probabilities = dict.Select(kv => new { Name = kv.Key, Probability = list[int.Parse(kv.Key.Substring(1)) - 1], Code = kv.Value }).ToList();
             
@@ -45,13 +45,16 @@ namespace Program
                 Console.WriteLine($"{symbol.Name}\t{symbol.Probability}\t\t{symbol.Code}");
             }
 
-            void GetCodes(Huffman node, string code)
+            void CalculateCodes(Huffman node, string code)
             {
-                if (node.Left == null && node.Right == null) dict["x" + index++] = code;
+                if (node.Left == null && node.Right == null)
+                {
+                    dict["x" + index++] = code;
+                }
                 else
                 {
-                    if (node.Left != null) GetCodes(node.Left, code + "0");
-                    if (node.Right != null) GetCodes(node.Right, code + "1");
+                    if (node.Left != null) CalculateCodes(node.Left, code + "0");
+                    if (node.Right != null) CalculateCodes(node.Right, code + "1");
                 }
             }
         }

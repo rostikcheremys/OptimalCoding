@@ -9,33 +9,32 @@ namespace Program
     {
         static void Main()
         {
-            Console.WriteLine("Введіть 1 для метода кодування методикою Хаффмена:");
-            Console.WriteLine("Введіть 2 для метода кодування методикою Шеннона-Фано:");
+            Console.WriteLine("Введiть 1 для метода кодування методикою Хаффмена:");
+            Console.WriteLine("Введiть 2 для метода кодування методикою Шеннона-Фано:");
             
             uint choice = Convert.ToUInt32(Console.ReadLine());
             
             switch (choice)
             {
                 case 1:
-                    Console.WriteLine("Введіть через пробіл ймовірності виникнення символів:");
+                    Console.WriteLine("Введiть через пробiл ймовiрностi виникнення символiв:");
                     
                     List<double> listOfFirst = Console.ReadLine()!.Trim().Split().Select(s => double.Parse(s, CultureInfo.InvariantCulture)).ToList();
-                    Dictionary<string, string> dictOfFirst = new Dictionary<string, string>();
+                    Dictionary<string, string> dict = new Dictionary<string, string>();
                     
                     Huffman taskOfFirst = new Huffman();
 
-                    taskOfFirst.TaskOfFirst(dictOfFirst, listOfFirst);
+                    taskOfFirst.TaskOfFirst(dict, listOfFirst);
                     break;
                 
                 case 2:
-                    Console.WriteLine("Введіть через пробіл ймовірності виникнення символів:");
+                    Console.WriteLine("Введiть через пробiл ймовiрностi виникнення символiв:");
                     
                     List<double> listOfSecond = Console.ReadLine()!.Trim().Split().Select(s => double.Parse(s, CultureInfo.InvariantCulture)).ToList();
-                    Dictionary<string, string> dictOfSecond = new Dictionary<string, string>();
 
                     ShannonFano taskOfSecond = new ShannonFano();
             
-                    taskOfSecond.TaskOfSecond(dictOfSecond, listOfSecond);
+                    taskOfSecond.TaskOfSecond(listOfSecond);
                     break;
             }
         }
