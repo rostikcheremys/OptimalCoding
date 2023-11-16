@@ -29,7 +29,7 @@ namespace Program
             
             int index = 1;
 
-            GetCodes(nodes[0], "", dict, ref index);
+            CalculateCodes(nodes[0], "", dict, ref index);
 
             Console.WriteLine("\nКодування методикою Хаффмена:");
             Console.WriteLine("Symbol\tProbability\tCode");
@@ -40,13 +40,13 @@ namespace Program
             }
         }
 
-        private void GetCodes(Huffman node, string code, Dictionary<string, string> dict, ref int index)
+        private void CalculateCodes(Huffman node, string code, Dictionary<string, string> dict, ref int index)
         {
             if (node.Left == null && node.Right == null) dict[index++.ToString()] = code;
             else
             {
-                if (node.Left != null) GetCodes(node.Left, code + "0", dict, ref index);
-                if (node.Right != null) GetCodes(node.Right, code + "1", dict, ref index);
+                if (node.Left != null) CalculateCodes(node.Left, code + "0", dict, ref index);
+                if (node.Right != null) CalculateCodes(node.Right, code + "1", dict, ref index);
             }
         }
     }
