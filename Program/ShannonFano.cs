@@ -22,8 +22,8 @@ namespace Program
                 probabilities.Add(new ShannonFano { Name = "x" + index++, Probability = prob });
             }
 
-            // Відсортовуємо ймовірності в порядку спадання
-            probabilities.Sort((x, y) => y.Probability.CompareTo(x.Probability));
+            // Відсортовуємо ймовірності в порядку незростання
+            probabilities.Sort((x, y) => x.Probability.CompareTo(y.Probability));
 
             // Розділюємо ймовірності за методикою Шеннона-Фано
             Divide(probabilities, 0, probabilities.Count - 1);
